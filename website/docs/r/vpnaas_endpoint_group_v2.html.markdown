@@ -16,8 +16,10 @@ Manages a V2 Neutron Endpoint Group resource within OpenStack.
 resource "openstack_vpnaas_endpoint_group_v2" "group_1" {
   name = "Group 1"
   type = "cidr"
-  endpoints = ["10.2.0.0/24",
-  "10.3.0.0/24", ]
+  endpoints = [
+    "10.2.0.0/24",
+    "10.3.0.0/24",
+  ]
 }
 ```
 
@@ -41,10 +43,10 @@ The following arguments are supported:
 
 * `type` -  The type of the endpoints in the group. A valid value is subnet, cidr, network, router, or vlan.
     Changing this creates a new group.
-    
+
 * `endpoints` - List of endpoints of the same type, for the endpoint group. The values will depend on the type.
     Changing this creates a new group.
-    
+
 * `value_specs` - (Optional) Map of additional options.
 
 ## Attributes Reference

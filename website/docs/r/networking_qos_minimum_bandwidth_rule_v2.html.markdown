@@ -21,7 +21,7 @@ resource "openstack_networking_qos_policy_v2" "qos_policy_1" {
 }
 
 resource "openstack_networking_qos_minimum_bandwidth_rule_v2" "minimum_bandwidth_rule_1" {
-  qos_policy_id = "${openstack_networking_qos_policy_v2.qos_policy_1.id}"
+  qos_policy_id = openstack_networking_qos_policy_v2.qos_policy_1.id
   min_kbps      = 200
 }
 ```
@@ -33,15 +33,15 @@ The following arguments are supported:
 * `region` - (Optional) The region in which to obtain the V2 Networking client.
     A Networking client is needed to create a Neutron QoS minimum bandwidth rule. If omitted, the
     `region` argument of the provider is used. Changing this creates a new QoS minimum bandwidth rule.
-    
+
 * `qos_policy_id` - (Required) The QoS policy reference. Changing this creates a new QoS minimum bandwidth rule.
-   
+
 * `min_kbps` - (Required) The minimum kilobits per second. Changing this updates the min kbps value of the existing
     QoS minimum bandwidth rule.
 
 * `direction` - (Optional) The direction of traffic. Defaults to "egress". Changing this updates the direction of the
     existing QoS minimum bandwidth rule.
-    
+
 ## Attributes Reference
 
 The following attributes are exported:

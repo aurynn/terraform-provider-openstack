@@ -58,6 +58,7 @@ are exported:
 * `project_domain_name` - The domain name of the project.
 * `project_domain_id` - The domain ID of the project.
 * `roles` - A list of roles in the current scope. See reference below.
+* `region` - The region of the current auth scope.
 * `service_catalog` - A list of service catalog entries returned with the token.
 
 The `roles` block contains:

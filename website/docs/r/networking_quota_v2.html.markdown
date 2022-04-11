@@ -22,11 +22,11 @@ Manages a V2 networking quota resource within OpenStack.
 
 ```hcl
 resource "openstack_identity_project_v3" "project_1" {
-  name = project_1
+  name = "project_1"
 }
 
 resource "openstack_networking_quota_v2" "quota_1" {
-  project_id          = "${openstack_identity_project_v3.project_1.id}"
+  project_id          = openstack_identity_project_v3.project_1.id
   floatingip          = 10
   network             = 4
   port                = 100

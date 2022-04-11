@@ -24,7 +24,7 @@ resource "openstack_dns_zone_v2" "example_zone" {
 }
 
 resource "openstack_dns_recordset_v2" "rs_example_com" {
-  zone_id     = "${openstack_dns_zone_v2.example_zone.id}"
+  zone_id     = openstack_dns_zone_v2.example_zone.id
   name        = "rs.example.com."
   description = "An example record set"
   ttl         = 3000
@@ -48,7 +48,7 @@ The following arguments are supported:
   Changing this creates a new DNS  record set.
 
 * `project_id` - (Optional) The ID of the project DNS zone is created
-  for, sets `X-Auth-Sudo-Tenant-ID` header (requires an assigned 
+  for, sets `X-Auth-Sudo-Tenant-ID` header (requires an assigned
   user role in target project)
 
 * `type` - (Optional) The type of record set. Examples: "A", "MX".

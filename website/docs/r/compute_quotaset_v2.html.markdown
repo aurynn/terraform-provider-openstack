@@ -22,11 +22,11 @@ Manages a V2 compute quotaset resource within OpenStack.
 
 ```hcl
 resource "openstack_identity_project_v3" "project_1" {
-  name = project_1
+  name = "project_1"
 }
 
 resource "openstack_compute_quotaset_v2" "quotaset_1" {
-  project_id           = "${openstack_identity_project_v3.project_1.id}"
+  project_id           = openstack_identity_project_v3.project_1.id
   key_pairs            = 10
   ram                  = 40960
   cores                = 32

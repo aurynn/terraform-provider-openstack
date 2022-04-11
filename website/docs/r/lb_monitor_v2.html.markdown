@@ -14,7 +14,7 @@ Manages a V2 monitor resource within OpenStack.
 
 ```hcl
 resource "openstack_lb_monitor_v2" "monitor_1" {
-  pool_id     = "${openstack_lb_pool_v2.pool_1.id}"
+  pool_id     = openstack_lb_pool_v2.pool_1.id
   type        = "PING"
   delay       = 20
   timeout     = 10
@@ -52,7 +52,7 @@ The following arguments are supported:
 * `max_retries` - (Required) Number of permissible ping failures before
     changing the member's status to INACTIVE. Must be a number between 1
     and 10.
-    
+
 * `max_retries_down` - (Optional) Number of permissible ping failures befor changing the member's
     status to ERROR. Must be a number between 1 and 10 (supported only in Octavia).
     Changing this updates the max_retries_down of the existing monitor.

@@ -40,7 +40,7 @@ resource "openstack_keymanager_secret_v1" "secret_1" {
 ```hcl
 resource "openstack_keymanager_secret_v1" "secret_1" {
   name                     = "password"
-  payload                  = "${base64encode("password with the whitespace at the end ")}"
+  payload                  = base64encode("password with the whitespace at the end ")
   secret_type              = "passphrase"
   payload_content_type     = "application/octet-stream"
   payload_content_encoding = "base64"
@@ -52,10 +52,10 @@ resource "openstack_keymanager_secret_v1" "secret_1" {
 ```hcl
 resource "openstack_keymanager_secret_v1" "secret_1" {
   name                 = "certificate"
-  payload              = "${file("certificate.pem")}"
+  payload              = file("certificate.pem")
   secret_type          = "certificate"
   payload_content_type = "text/plain"
-  expiration           = "${timeadd(timestamp(), format("%dh", 8760))}" # one year in hours
+  expiration           = timeadd(timestamp(), format("%dh", 8760)) # one year in hours
 
   lifecycle {
     ignore_changes = [
@@ -72,7 +72,7 @@ resource "openstack_keymanager_secret_v1" "secret_1" {
 ```hcl
 resource "openstack_keymanager_secret_v1" "secret_1" {
   name                 = "certificate"
-  payload              = "${file("certificate.pem")}"
+  payload              = file("certificate.pem")
   secret_type          = "certificate"
   payload_content_type = "text/plain"
 
@@ -99,7 +99,7 @@ The following arguments are supported:
 
 * `name` - (Optional) Human-readable name for the Secret. Does not have
     to be unique.
-    
+
 * `bit_length` - (Optional) Metadata provided by a user or system for informational purposes.
 
 * `algorithm` - (Optional) Metadata provided by a user or system for informational purposes.
@@ -107,7 +107,7 @@ The following arguments are supported:
 * `mode` - (Optional) Metadata provided by a user or system for informational purposes.
 
 * `secret_type` - (Optional) Used to indicate the type of secret being stored. For more information see [Secret types](https://docs.openstack.org/barbican/latest/api/reference/secret_types.html).
- 
+
 * `payload` - (Optional) The secret's data to be stored. **payload\_content\_type** must also be supplied if **payload** is included.
 
 * `payload_content_type` - (Optional) (required if **payload** is included) The media type for the content of the payload. Must be one of `text/plain`, `text/plain;charset=utf-8`, `text/plain; charset=utf-8`, `application/octet-stream`, `application/pkcs8`.

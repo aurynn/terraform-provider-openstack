@@ -19,7 +19,19 @@ resource "openstack_orchestration_stack_v1" "stack_1" {
 	length = 4
   }
   template_opts = {
-	Bin = "heat_template_version: 2013-05-23\nparameters:\n  length:\n    type: number\nresources:\n  test_res:\n    type: OS::Heat::TestResource\n  random:\n    type: OS::Heat::RandomString\n    properties:\n      length: {get_param: length}\n"
+	Bin = <<-YAML
+  heat_template_version: 2013-05-23
+  parameters:
+    length:
+      type: number
+  resources:
+    test_res:
+      type: OS::Heat::TestResource
+    random:
+      type: OS::Heat::RandomString
+      properties:
+        length: {get_param: length}
+  YAML
   }
   environment_opts = {
 	Bin = "\n"

@@ -15,13 +15,13 @@ Manages a V2 Neutron IPSec site connection resource within OpenStack.
 ```hcl
 resource "openstack_vpnaas_site_connection_v2" "conn_1" {
   name              = "connection_1"
-  ikepolicy_id      = "${openstack_vpnaas_ike_policy_v2.policy_2.id}"
-  ipsecpolicy_id    = "${openstack_vpnaas_ipsec_policy_v2.policy_1.id}"
-  vpnservice_id     = "${openstack_vpnaas_service_v2.service_1.id}"
+  ikepolicy_id      = openstack_vpnaas_ike_policy_v2.policy_2.id
+  ipsecpolicy_id    = openstack_vpnaas_ipsec_policy_v2.policy_1.id
+  vpnservice_id     = openstack_vpnaas_service_v2.service_1.id
   psk               = "secret"
   peer_address      = "192.168.10.1"
-  local_ep_group_id = "${openstack_vpnaas_endpoint_group_v2.group_2.id}"
-  peer_ep_group_id  = "${openstack_vpnaas_endpoint_group_v2.group_1.id}"
+  local_ep_group_id = openstack_vpnaas_endpoint_group_v2.group_2.id
+  peer_ep_group_id  = openstack_vpnaas_endpoint_group_v2.group_1.id
   dpd {
     action   = "restart"
     timeout  = 42
@@ -59,7 +59,7 @@ The following arguments are supported:
     You must specify this parameter with the peer_ep_group_id parameter unless
 	in backward- compatible mode where peer_cidrs is provided with a subnet_id for the VPN service.
     Changing this updates the existing connection.
-    
+
 * `ipsecpolicy_id` - (Required) The ID of the IPsec policy. Changing this creates a new connection.
 
 * `peer_id` - (Required) The peer router identity for authentication. A valid value is an IPv4 address, IPv6 address, e-mail address, key ID, or FQDN.
@@ -86,18 +86,18 @@ The following arguments are supported:
     - `action` - (Optional) The dead peer detection (DPD) action.
     	A valid value is clear, hold, restart, disabled, or restart-by-peer.
     	Default value is hold.
-    
+
     - `timeout` - (Optional) The dead peer detection (DPD) timeout in seconds.
     	A valid value is a positive integer that is greater than the DPD interval value.
     	Default is 120.
-    
+
     - `interval` - (Optional) The dead peer detection (DPD) interval, in seconds.
     	A valid value is a positive integer.
     	Default is 30.
 
 * `mtu` -  (Optional) The maximum transmission unit (MTU) value to address fragmentation.
 	Minimum value is 68 for IPv4, and 1280 for IPv6.
-	
+
 * `value_specs` - (Optional) Map of additional options.
 
 ## Attributes Reference

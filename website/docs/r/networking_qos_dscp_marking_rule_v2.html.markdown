@@ -21,7 +21,7 @@ resource "openstack_networking_qos_policy_v2" "qos_policy_1" {
 }
 
 resource "openstack_networking_qos_dscp_marking_rule_v2" "dscp_marking_rule_1" {
-  qos_policy_id = "${openstack_networking_qos_policy_v2.qos_policy_1.id}"
+  qos_policy_id = openstack_networking_qos_policy_v2.qos_policy_1.id
   dscp_mark     = 26
 }
 ```
@@ -33,12 +33,12 @@ The following arguments are supported:
 * `region` - (Optional) The region in which to obtain the V2 Networking client.
     A Networking client is needed to create a Neutron QoS DSCP marking rule. If omitted, the
     `region` argument of the provider is used. Changing this creates a new QoS DSCP marking rule.
-    
+
 * `qos_policy_id` - (Required) The QoS policy reference. Changing this creates a new QoS DSCP marking rule.
-   
+
 * `dscp_mark` - (Required) The value of DSCP mark. Changing this updates the DSCP mark value existing
     QoS DSCP marking rule.
-    
+
 ## Attributes Reference
 
 The following attributes are exported:
